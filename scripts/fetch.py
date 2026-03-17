@@ -1,21 +1,3 @@
-#!/usr/bin/env python3
-"""
-通用网页正文提取脚本（基于 Scrapling + html2text）
-返回干净的 Markdown 格式，效果与 Jina Reader 相当。
-用于 article-writer skill 的二级内容提取方案（Jina 超限或失败时使用）
-
-用法：
-  python3 fetch.py <url> [max_chars]
-
-示例：
-  python3 fetch.py https://example.com/article 12000
-  python3 fetch.py https://mp.weixin.qq.com/s/xxx 30000
-
-输出：
-  Markdown 格式正文，截断至 max_chars（默认 30000）
-  图片使用原始 URL 内嵌在 Markdown 中（data-src 懒加载已自动处理）
-"""
-
 # /// script
 # requires-python = ">=3.8"
 # dependencies = [
