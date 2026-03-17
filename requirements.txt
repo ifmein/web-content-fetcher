@@ -1,0 +1,19 @@
+# 依赖已嵌入 scripts/fetch.py 中（PEP 723 inline metadata）
+
+# 如需手动安装，使用：
+
+# pip install -r requirements.txt
+
+# 或 uv pip install -r requirements.txt
+
+scrapling
+html2text
+cssselect
+lxml
+orjson
+tld
+typing-extensions
+w3lib
+curl-cffi
+playwright
+browserforge

@@ -19,8 +19,8 @@
 # /// script
 # requires-python = ">=3.8"
 # dependencies = [
-#   "scrapling>=0.4.0",
-#   "html2text>=2024.2.26",
+#   "scrapling",
+#   "html2text",
 #   "cssselect",
 #   "lxml",
 #   "orjson",
