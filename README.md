@@ -2,76 +2,35 @@
 
 OpenClaw Skill — 网页正文提取，永久免费，支持微信公众号。
 
-## 文件结构
+## 快速使用
 
-```
-web-content-fetcher/
-├── SKILL.md          # OpenClaw skill 描述文件（必须）
-├── README.md         # 本文件
-└── scripts/
-    └── fetch.py      # Scrapling + html2text 提取脚本（支持 PEP 723 inline metadata）
-```
-
-## 快速安装
-
-1. npx skills add shirenchuang/web-content-fetcher 直接安装
-
-或者
-
-1. 将整个 `web-content-fetcher/` 目录放到你的 OpenClaw workspace skills 目录：
-
-   ```
-   ~/.openclaw/workspace/skills/web-content-fetcher/
-   ```
-
-2. 安装 Python 依赖（选择一种方式，可选，因为依赖已嵌入脚本）：
-
-   - 使用 uv（推荐，支持 inline metadata）：
-     ```bash
-     uv pip install -r requirements.txt
-     ```
-
-3. 重启 OpenClaw，skill 自动生效。
-
-## 单独使用脚本
-
-不需要 OpenClaw，直接命令行：
-
-- 使用 uv（推荐，自动安装依赖）：
-
-  ```bash
-  uv run scripts/fetch.py https://mp.weixin.qq.com/s/xxx 30000
-  ```
-
-输出为干净的 Markdown 正文，可重定向到文件：
+使用 uv 直接运行（自动安装依赖）：
 
 ```bash
+uv run scripts/fetch.py <url> [max_chars]
+```
+
+示例：
+
+```bash
+uv run scripts/fetch.py https://mp.weixin.qq.com/s/xxx 30000
 uv run scripts/fetch.py https://example.com/article > output.md
 ```
 
+返回干净的 Markdown 正文，保留标题、链接、图片、列表结构。
+
 ## 支持平台
 
-| 平台       | 方案             | 状态 |
-| ---------- | ---------------- | ---- |
-| 微信公众号 | Scrapling        | ✅   |
-| Substack   | Scrapling / Jina | ✅   |
-| Medium     | Scrapling / Jina | ✅   |
-| GitHub     | web_fetch        | ✅   |
-| 知乎       | Scrapling        | ✅   |
-| CSDN       | Scrapling        | ✅   |
-| 小红书     | ❌ 需登录态      | ❌   |
-
-## 提取效果
-
-返回标准 Markdown，保留：
-
-- 标题层级（`# ## ###`）
-- 超链接 `[文字](url)`
-- 图片 `![alt](url)`
-- 列表、代码块、引用块
+| 平台       | 状态 |
+| ---------- | ---- |
+| 微信公众号 | ✅   |
+| Substack   | ✅   |
+| Medium     | ✅   |
+| GitHub     | ✅   |
+| 知乎       | ✅   |
+| CSDN       | ✅   |
+| 小红书     | ❌   |
 
 ## 作者
 
 石臻说AI · OpenClaw 实战系列
-
-公众号一键排版 一键发布SKILL ： https://github.com/shirenchuang/kuaifa
