@@ -60,26 +60,14 @@ URL
 
 ## 安装依赖
 
-```bash
-# 使用 pip
-pip install scrapling html2text --break-system-packages
+依赖已嵌入脚本（PEP 723），uv 自动解析并安装。
 
-# 或使用 uv（推荐，支持 inline metadata）
-uv pip install scrapling html2text
-```
+## 脚本调用
 
-## 脚本路径
-
-`scripts/fetch.py` — Scrapling + html2text 提取脚本（支持 PEP 723 inline metadata）
-
-调用方式：
+使用 uv 运行脚本（自动安装依赖）：
 
 ```bash
-# 使用 uv（推荐，自动安装依赖）
 uv run ~/.openclaw/workspace/skills/web-content-fetcher/scripts/fetch.py <url> [max_chars]
-
-# 或使用 python3（需先安装依赖）
-python3 ~/.openclaw/workspace/skills/web-content-fetcher/scripts/fetch.py <url> [max_chars]
 ```
 
 ## 防死循环规则
