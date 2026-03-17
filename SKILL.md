@@ -12,6 +12,7 @@ description: >
 ## 能力说明
 
 给一个 URL，返回干净的 Markdown 格式正文，保留：
+
 - 标题层级（# ## ###）
 - 超链接（[文字](url)）
 - 图片（![alt](url)）
@@ -41,6 +42,7 @@ URL
 ## 域名快捷路由
 
 直接跳过 Jina，节省配额：
+
 - `mp.weixin.qq.com` → 直接用 Scrapling
 - `zhuanlan.zhihu.com`、`juejin.cn`、`csdn.net` → 优先 Scrapling
 
@@ -59,15 +61,24 @@ URL
 ## 安装依赖
 
 ```bash
+# 使用 pip
 pip install scrapling html2text --break-system-packages
+
+# 或使用 uv（推荐，支持 inline metadata）
+uv pip install scrapling html2text
 ```
 
 ## 脚本路径
 
-`scripts/fetch.py` — Scrapling + html2text 提取脚本
+`scripts/fetch.py` — Scrapling + html2text 提取脚本（支持 PEP 723 inline metadata）
 
 调用方式：
+
 ```bash
+# 使用 uv（推荐，自动安装依赖）
+uv run ~/.openclaw/workspace/skills/web-content-fetcher/scripts/fetch.py <url> [max_chars]
+
+# 或使用 python3（需先安装依赖）
 python3 ~/.openclaw/workspace/skills/web-content-fetcher/scripts/fetch.py <url> [max_chars]
 ```
 

@@ -16,6 +16,23 @@
   图片使用原始 URL 内嵌在 Markdown 中（data-src 懒加载已自动处理）
 """
 
+# /// script
+# requires-python = ">=3.8"
+# dependencies = [
+#   "scrapling>=0.4.0",
+#   "html2text>=2024.2.26",
+#   "cssselect",
+#   "lxml",
+#   "orjson",
+#   "tld",
+#   "typing-extensions",
+#   "w3lib",
+#   "curl-cffi",
+#   "playwright",
+#   "browserforge",
+# ]
+# ///
+
 import sys
 import re
 import html2text
@@ -31,16 +48,13 @@ def fix_lazy_images(html_raw):
     html_raw = re.sub(
         r'<img([^>]*?)\sdata-src="([^"]+)"([^>]*?)>',
         lambda m: f'<img{m.group(1)} src="{m.group(2)}"{m.group(3)}>',
-        html_raw
+        html_raw,
     )
     return html_raw
 
 
 def scrapling_fetch(url, max_chars=30000):
-    page = Fetcher(auto_match=False).get(
-        url,
-        headers={"Referer": "https://www.google.com/search?q=site"}
-    )
+    page = Fetcher.get(url, headers={"Referer": "https://www.google.com/search?q=site"})
 
     h = html2text.HTML2Text()
     h.ignore_links = False
@@ -52,11 +66,11 @@ def scrapling_fetch(url, max_chars=30000):
         selectors = ["div#js_content", "div.rich_media_content"]
     else:
         selectors = [
-            'article',
-            'main',
-            '.post-content',
-            '.entry-content',
-            '.article-body',
+            "article",
+            "main",
+            ".post-content",
+            ".entry-content",
+            ".article-body",
             '[class*="body"]',
             '[class*="content"]',
             '[class*="article"]',
@@ -67,20 +81,21 @@ def scrapling_fetch(url, max_chars=30000):
         if els:
             html_raw = fix_lazy_images(els[0].html_content)
             md = h.handle(html_raw)
-            md = re.sub(r'\n{3,}', '\n\n', md).strip()
+            md = re.sub(r"\n{3,}", "\n\n", md).strip()
             if len(md) > 300:
                 return md[:max_chars], selector
 
     # fallback：全页转 Markdown
     html_raw = fix_lazy_images(page.html_content)
     md = h.handle(html_raw)
-    md = re.sub(r'\n{3,}', '\n\n', md).strip()
-    return md[:max_chars], 'body(fallback)'
+    md = re.sub(r"\n{3,}", "\n\n", md).strip()
+    return md[:max_chars], "body(fallback)"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("用法: python3 fetch.py <url> [max_chars]", file=sys.stderr)
+        # print("用法: python3 fetch.py <url> [max_chars]", file=sys.stderr)
+        print("Usage: uv fetch.py <url> [max_chars]", file=sys.stderr)
         sys.exit(1)
 
     url = sys.argv[1]
